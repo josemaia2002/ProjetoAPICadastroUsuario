@@ -9,51 +9,52 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.backend.model.User;
 import com.spring.backend.repository.UserRepository;
 
 @RestController
-@RequestMapping("/users")
 public class UserController {
     
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping
-    public List<User> getAllUsers() {
+   @GetMapping(value = "/")
+    public String getPage() {
+        return "Welcome!";
+    }
+
+    @GetMapping(value = "/users")
+    public List<User> getUsers() {
         return userRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("User not found"));
+    @PostMapping(value = "/save")
+    public String saveUser(@RequestBody User user) {
+        userRepository.save(user);
+
+        return "saved...";
     }
 
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
-    }
-
-    @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
-        User updatedUser = userRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("User not found"));
-
-        updatedUser.setFirstName(user.getFirstName());            
+    @PutMapping(value = "update/{id}")
+    public String updateUser(@PathVariable long id, @RequestBody User user) {
+        User updatedUser = userRepository.findById(id).get();
+        updatedUser.setFirstName(user.getFirstName());
         updatedUser.setLastName(user.getLastName());
+        updatedUser.setAge(user.getAge());
         updatedUser.setOccupation(user.getOccupation());
-        updatedUser.setEmail(user.getEmail());
+        userRepository.save(updatedUser);
 
-        return userRepository.save(updatedUser);
+        return "saved...";
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userRepository.deleteById(id);
+    @DeleteMapping(value = "delete/{id}")
+    public String deleteUser(@PathVariable long id) {
+        User deletedUser = userRepo.findById(id).get();
+        userRepository.delete(deletedUser);
+
+        return "deleted...";
     }
     
 }
