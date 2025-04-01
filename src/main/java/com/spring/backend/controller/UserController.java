@@ -51,7 +51,7 @@ public class UserController {
 
     @DeleteMapping(value = "delete/{id}")
     public String deleteUser(@PathVariable long id) {
-        User deletedUser = userRepo.findById(id).get();
+        User deletedUser = userRepository.findById(id).get();
         userRepository.delete(deletedUser);
 
         return "deleted...";
