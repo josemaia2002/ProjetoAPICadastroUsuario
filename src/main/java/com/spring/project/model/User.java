@@ -1,4 +1,6 @@
-package com.spring.backend.model;
+package com.spring.project.model;
+
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="user", schema = "public")
+@Table(name = "user", schema = "public")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,11 +22,11 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "occupation")
-    private String occupation;
-
     @Column(name = "email")
     private String email;
+
+    @Column(name = "birthday")
+    private LocalDate birthday;
 
     public Long getId() {
         return id;
@@ -50,19 +52,19 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getOccupation() {
-        return occupation;
-    }
-
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 }

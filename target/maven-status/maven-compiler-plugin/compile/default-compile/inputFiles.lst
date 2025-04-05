@@ -1,0 +1,5 @@
+/home/maia/Projetos/ProjetoAPICadastroUsuario/src/main/java/com/spring/project/ProjectApplication.java
+/home/maia/Projetos/ProjetoAPICadastroUsuario/src/main/java/com/spring/project/controller/UserController.java
+/home/maia/Projetos/ProjetoAPICadastroUsuario/src/main/java/com/spring/project/model/User.java
+/home/maia/Projetos/ProjetoAPICadastroUsuario/src/main/java/com/spring/project/model/UserNotFoundException.java
+/home/maia/Projetos/ProjetoAPICadastroUsuario/src/main/java/com/spring/project/repository/UserRepository.java
