@@ -28,6 +28,15 @@ public class UserService {
         return user.get();
     }
 
+    public User findUserByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email); 
+
+        if(user.isEmpty()) {
+            throw new UserNotFoundException();
+        }
+        return user.get();
+    }
+
     public void createUser(User user) {
         userRepository.save(user);
     }

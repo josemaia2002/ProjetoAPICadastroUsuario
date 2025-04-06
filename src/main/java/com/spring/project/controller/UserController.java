@@ -33,6 +33,12 @@ public class UserController {
         return userService.findUserById(id);
     }
 
+    @GetMapping(value = "/email/{email}")
+    public User findByEmail(@PathVariable String email) {
+        return userService.findUserByEmail(email);
+    }
+
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/")
     public void save(@RequestBody User user) {
